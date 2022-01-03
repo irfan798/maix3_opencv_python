@@ -1,0 +1,16 @@
+diff --git a/cmake/OpenCVDetectPython.cmake b/cmake/OpenCVDetectPython.cmake
+index 4ff02a77d3..ca0faa32cf 100644
+--- a/cmake/OpenCVDetectPython.cmake
++++ b/cmake/OpenCVDetectPython.cmake
+@@ -291,9 +291,9 @@ if(PYTHON_DEFAULT_EXECUTABLE)
+ elseif(PYTHON2_EXECUTABLE AND PYTHON2INTERP_FOUND)
+     # Use Python 2 as default Python interpreter
+     set(PYTHON_DEFAULT_AVAILABLE "TRUE")
+-    set(PYTHON_DEFAULT_EXECUTABLE "${PYTHON2_EXECUTABLE}")
++    set(PYTHON_DEFAULT_EXECUTABLE "${PYTHON3_EXECUTABLE}")
+ elseif(PYTHON3_EXECUTABLE AND PYTHON3INTERP_FOUND)
+     # Use Python 3 as fallback Python interpreter (if there is no Python 2)
+     set(PYTHON_DEFAULT_AVAILABLE "TRUE")
+-    set(PYTHON_DEFAULT_EXECUTABLE "${PYTHON3_EXECUTABLE}")
++    set(PYTHON_DEFAULT_EXECUTABLE "${PYTHON2_EXECUTABLE}")
+ endif()

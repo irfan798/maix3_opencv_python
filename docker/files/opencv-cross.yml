@@ -1,0 +1,40 @@
+name: opencv-cross
+channels:
+  - defaults
+dependencies:
+  - python=3.8.12=h12debd9_0
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=4.5=1_gnu
+  - blas=1.0=mkl
+  - ca-certificates=2021.10.26=h06a4308_2
+  - certifi=2021.10.8=py38h06a4308_0
+  - intel-openmp=2021.4.0=h06a4308_3561
+  - ld_impl_linux-64=2.35.1=h7274673_9
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=9.3.0=h5101ec6_17
+  - libgomp=9.3.0=h5101ec6_17
+  - libstdcxx-ng=9.3.0=hd4cf53a_17
+  - mkl=2020.2=256
+  - mkl-service=2.3.0=py38he904b0f_0
+  - mkl_fft=1.3.0=py38h54f3939_0
+  - mkl_random=1.1.1=py38h0573a6f_0
+  - ncurses=6.3=h7f8727e_2
+  - numpy=1.19.2=py38h54aff64_0
+  - numpy-base=1.19.2=py38hfa32c7d_0
+  - openssl=1.1.1l=h7f8727e_0
+  - pip=21.2.4=py38h06a4308_0
+  - pybind11=2.8.1=py38hd09550d_0
+  - readline=8.1=h27cfd23_0
+  - setuptools=58.0.4=py38h06a4308_0
+  - six=1.16.0=pyhd3eb1b0_0
+  - sqlite=3.36.0=hc218d9a_0
+  - tk=8.6.11=h1ccaba5_0
+  - wheel=0.37.0=pyhd3eb1b0_1
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - distro==1.6.0
+    - packaging==21.3
+    - pyparsing==3.0.6
+    - scikit-build==0.12.0
+prefix: /opt/conda/envs/opencv-cross
