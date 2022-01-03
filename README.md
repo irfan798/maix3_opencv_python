@@ -17,7 +17,7 @@ Builds
 
 These builds works on **MAIX-II Dock** with firmware that has `Numpy:1.19.2`
 
-If you are building for a firmware that has different numpy, please change numpy version accordingly in [opencv-cross.yml](./docker/opencv-cross.yml)
+If you are building for a firmware that has different numpy, please change numpy version accordingly in [opencv-cross.yml](./docker/files/opencv-cross.yml)
 
 ## Build Docker
 ```
@@ -52,6 +52,16 @@ Check https://github.com/dockcross/dockcross#examples
 
 # Installing packages on MAIX-II Dock
 
+## Connect to Maix-II Dock using ADB
+If you connect cable into Maix-II Dock's `USB OTG` port, you will should be able to use `adb` commands
+
+Check with `adb devices -l`
+
+```
+adb push ./repos/opencv-python/dist/opencv_python_headless-4.5.5.62-cp38-cp38-linux_armv7l.whl /root/
+adb shell "pip install /root/opencv_python_headless-4.5.5.62-cp38-cp38-linux_armv7l.whl --upgrade" 
+```
+
 ## Connect to Maix-II Dock serial
 
 Connect a USB-C cable to Maix-II Dock's `USB UART` port.
@@ -62,10 +72,41 @@ You shall be able to `screen` into firmware
 TODO:Continue ssh setup
 
 
-## Connect to Maix-II Dock using ADB
-If you connect cable into Maix-II Dock's `USB OTG` port, you will should be able to use `adb` commands
 
+# Troubleshooting
+## ADB
+If you cannot see your device on `adb list` or access it make sure you have added your device to `udev` rules.
+
+1. Unplug **Maix-II Dock**
+2. In a console run:
 ```
-adb push ./dist/maixpy3-0.3.*-cp38-cp38-linux_armv7l.whl /root/
-adb shell "pip install ./root/maixpy3-0.3.*-cp38-cp38-linux_armv7l.whl --upgrade"
+sudo dmesg -wH
 ```
+3. Plug usb to `USB OTG` port on  Maix-II Dock
+
+You should note the new device in console, something like the following should appear:
+```
+[ +12.953497] usb 5-1: new high-speed USB device number 4 using xhci_hcd
+[  +0.230599] usb 5-1: New USB device found, idVendor=18d1, idProduct=0002, bcdDevice= 4.09
+[  +0.000006] usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[  +0.000002] usb 5-1: Manufacturer: Android
+[  +0.000002] usb 5-1: SerialNumber: 20080411
+````
+
+4. Take note of `idVendor` and
+
+Check your `/etc/udev/rules.d/51-android.rules` (if it doesn't exists create it) and add the following line with your own `idVendor`
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", MODE="0666"
+```
+
+5. Restart udev service with 
+```
+sudo systemctl restart udev
+```
+6. Restart adb service with
+```
+adb kill-server && adb start-server
+```
+7. Disconnect and reconnect the device again.
+8. Try `adb devices` again
