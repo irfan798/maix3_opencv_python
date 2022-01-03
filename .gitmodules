@@ -1,0 +1,6 @@
+[submodule "repos/opencv-python"]
+	path = repos/opencv-python
+	url = https://github.com/opencv/opencv-python.git
+[submodule "repos/MaixPy3"]
+	path = repos/MaixPy3
+	url = https://github.com/sipeed/MaixPy3.git
